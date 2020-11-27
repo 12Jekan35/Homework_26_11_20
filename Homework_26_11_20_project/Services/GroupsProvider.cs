@@ -56,61 +56,68 @@ ON [Groups].[specialty_id] = [Specialties].[id];",
             return resultList;
         }
 
-        public bool Add(Specialty item)
+        public bool Add(Group group) 
         {
             bool result = false;
             try
             {
                 connection.Open();
                 var command = new SqlCommand(
-                    cmdText: @"INSERT INTO [Specialties] 
-([code], [name])
-VALUES
-    (@Code, @Name);",
-                    connection: connection
+                    cmdText: 
+                    @"
+                            INSERT INTO [Groups]
+                                ([name], [year], [course], [specialty_id])
+                            VALUES
+                                (@Name, @Year, @Course, @SpecialtyId)
 
-                );
-                command.Parameters.AddWithValue("@Code", item.Code);
-                command.Parameters.AddWithValue("@Name", item.Name);
-                int affected = command.ExecuteNonQuery();
-                result = affected > 0;
+                    ", connection);
+                command.Parameters.AddWithValue("@Name", group.Name);
+                command.Parameters.AddWithValue("@Year", group.Year);
+                command.Parameters.AddWithValue("@Course", group.Course);
+                command.Parameters.AddWithValue("@SpecialtyId", group.SpecialtyId);
+
+                result = command.ExecuteNonQuery() > 0;
             }
-            finally
+            finally 
             {
                 connection.Close();
+
             }
+
             return result;
         }
-
-        public bool Update(Specialty item)
+        public bool Update(Group group) 
         {
             bool result = false;
             try
             {
                 connection.Open();
-                var command = new SqlCommand(
-                    cmdText: @"
-UPDATE [Specialties] SET
-[code] = @Code
-[name] = @Name
-WHERE [id] = @Id",
-                    connection: connection
-                );
-                command.Parameters.AddWithValue("@Code", item.Code);
-                command.Parameters.AddWithValue("@Name", item.Name);
-                command.Parameters.AddWithValue("@Id", item.Id);
+                var command = new SqlCommand
+                    (@"
+                        UPDATE [Groups]
+                        SET
+                            [year] = @Уear,
+                            [name] = @Name,
+                            [course] = @Course
+                        WHERE
+                            [id] = @Id
 
-                int affected = command.ExecuteNonQuery();
-                result = affected > 0;
+                    ", connection);
+                command.Parameters.AddWithValue("@Name", group.Name);
+                command.Parameters.AddWithValue("@Year", group.Year);
+                command.Parameters.AddWithValue("@Course", group.Course);
+                command.Parameters.AddWithValue("@Id", group.Id);
+                
+                result = command.ExecuteNonQuery() > 0;
             }
             finally
             {
                 connection.Close();
+
             }
             return result;
         }
-
-        public bool Delete(int id)
+        public bool Delete(int id) 
         {
             bool result = false;
             try
@@ -118,16 +125,19 @@ WHERE [id] = @Id",
                 connection.Open();
                 var command = new SqlCommand(
                     @"
-DELETE FROM [Specialties]
-WHERE [id] = @Id
-", connection);
+                        DELETE FROM [Groups]
+                        WHERE [id] = @Id
+                    ",
+                    connection
+                    );
                 command.Parameters.AddWithValue("@Id", id);
-                int affected = command.ExecuteNonQuery();
-                result = affected > 0;
+
+                result = command.ExecuteNonQuery() > 0;
             }
             finally
             {
                 connection.Close();
+
             }
             return result;
         }
