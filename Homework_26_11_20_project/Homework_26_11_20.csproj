@@ -51,6 +51,12 @@
     <Compile Include="Models\Student.cs" />
     <Compile Include="Services\GroupsProvider.cs" />
     <Compile Include="Services\SpecialtiesProvider.cs" />
+    <Compile Include="Views\GroupsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\GroupsForm.Designer.cs">
+      <DependentUpon>GroupsForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Views\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -65,6 +71,15 @@
     <Compile Include="Views\SpecialtiesForm.Designer.cs">
       <DependentUpon>SpecialtiesForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Views\StudentsForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Views\StudentsForm.Designer.cs">
+      <DependentUpon>StudentsForm.cs</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="Views\GroupsForm.resx">
+      <DependentUpon>GroupsForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Views\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -79,6 +94,9 @@
     </Compile>
     <EmbeddedResource Include="Views\SpecialtiesForm.resx">
       <DependentUpon>SpecialtiesForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Views\StudentsForm.resx">
+      <DependentUpon>StudentsForm.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>

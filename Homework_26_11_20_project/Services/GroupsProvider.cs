@@ -14,6 +14,7 @@ namespace Homework_26_11_20.Services
         {
             this.connection = connection;
         }
+
         private SqlConnection connection;
         public List<Group> GetAll()
         {
